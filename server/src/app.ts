@@ -3,6 +3,7 @@ import cors from 'cors';
 import authRoutes from './modules/auth/auth.routes';
 import dashboardRoutes from './modules/dashboard/dashboard.routes';
 import productRoutes from './modules/products/product.routes';
+import receiptsRoutes from './modules/receipts/receipts.routes';
 
 const app: Application = express();
 
@@ -23,14 +24,17 @@ app.get('/api/health', (req: Request, res: Response) => {
   });
 });
 
-// Module 1: Auth & Access Control
+// Auth & Access Control
 app.use('/api/auth', authRoutes);
 
-// Module 2: Command Center Dashboard & Operational Intelligence
+// Command Center Dashboard & Operational Intelligence
 app.use('/api/dashboard', dashboardRoutes);
 
 // Module 3: Master Catalog & Live Multi-Location Stock Engine
 app.use('/api/products', productRoutes);
+
+// Inbound Operations (Vendor Receipts)
+app.use('/api/receipts', receiptsRoutes);
 
 // Global Error Handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

@@ -611,5 +611,25 @@ export const api = {
     },
     getBottlenecks: () => request('/dashboard/bottlenecks'),
     getFilters: () => request('/dashboard/filters')
+  },
+  receipts: {
+    getReceipts: (params?: { search?: string; status?: string }) => {
+      const query = new URLSearchParams(params as Record<string, string>).toString();
+      return request(`/receipts${query ? `?${query}` : ''}`);
+    },
+    getReceiptById: (id: string) => request(`/receipts/${id}`),
+    createReceipt: (body: {
+      partnerContact: string;
+      sourceLocation?: string;
+      destLocation?: string;
+      scheduleDate: string;
+      responsibleName?: string;
+      lines: Array<{ productName: string; sku?: string; demandQty: number; uom?: string }>;
+    }) => request('/receipts', { method: 'POST', body: JSON.stringify(body) }),
+    updateStatus: (id: string, status: 'DRAFT' | 'READY' | 'DONE') =>
+      request(`/receipts/${id}/status`, { method: 'PUT', body: JSON.stringify({ status }) }),
+    dockAcceptance: (id: string, targetLocation: string) =>
+      request(`/receipts/${id}/dock-accept`, { method: 'POST', body: JSON.stringify({ targetLocation }) }),
+    getGRN: (id: string) => request(`/receipts/${id}/grn`)
   }
 };
