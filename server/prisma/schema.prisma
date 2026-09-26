@@ -1,0 +1,135 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  MANAGER
+  STAFF
+}
+
+enum OperationType {
+  RECEIPT    // Inbound: WH/IN/0001
+  DELIVERY   // Outbound: WH/OUT/0001
+  INTERNAL   // Inter-location: WH/INT/0001
+  ADJUSTMENT // Cycle count
+}
+
+enum OperationStatus {
+  DRAFT
+  WAITING
+  READY
+  DONE
+  CANCELED
+}
+
+model User {
+  id           String    @id @default(uuid())
+  loginId      String    @unique // Strictly 6 to 12 chars
+  email        String    @unique
+  passwordHash String
+  name         String
+  role         Role      @default(STAFF)
+  otpCode      String?
+  otpExpiresAt DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Warehouse {
+  id        String     @id @default(uuid())
+  name      String
+  shortCode String     @unique // e.g. WH
+  address   String?
+  locations Location[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Location {
+  id          String       @id @default(uuid())
+  name        String
+  shortCode   String       // e.g. WH/Stock1, WH/Stock2
+  warehouseId String
+  warehouse   Warehouse    @relation(fields: [warehouseId], references: [id], onDelete: Cascade)
+  stockLevels StockLevel[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+
+  @@unique([warehouseId, shortCode])
+}
+
+model Product {
+  id             String          @id @default(uuid())
+  name           String
+  sku            String          @unique
+  category       String
+  uom            String          @default("Units")
+  unitCost       Float           @default(0.0)
+  reorderMin     Float           @default(10.0)
+  stockLevels    StockLevel[]
+  operationLines OperationLine[]
+  ledgerEntries  StockLedger[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+
+model StockLevel {
+  id         String   @id @default(uuid())
+  productId  String
+  locationId String
+  onHand     Float    @default(0.0)
+  reserved   Float    @default(0.0) // Free to use = onHand - reserved
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  location   Location @relation(fields: [locationId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([productId, locationId])
+}
+
+model Operation {
+  id               String          @id @default(uuid())
+  reference        String          @unique // e.g. WH/IN/0001 or WH/OUT/0001
+  type             OperationType
+  status           OperationStatus @default(DRAFT)
+  partnerContact   String?
+  deliveryAddress  String?
+  scheduleDate     DateTime
+  responsibleName  String?
+  sourceLocation   String?
+  destLocation     String?
+  lines            OperationLine[]
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+}
+
+model OperationLine {
+  id          String    @id @default(uuid())
+  operationId String
+  productId   String
+  demandQty   Float
+  doneQty     Float     @default(0.0)
+  operation   Operation @relation(fields: [operationId], references: [id], onDelete: Cascade)
+  product     Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+}
+
+model StockLedger {
+  id           String   @id @default(uuid())
+  reference    String
+  date         DateTime @default(now())
+  contact      String?
+  fromLocation String
+  toLocation   String
+  productId    String
+  productName  String
+  quantity     Float
+  status       String
+  moveType     String   // IN (Green), OUT (Red), INT (Cyan)
+  product      Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+}
