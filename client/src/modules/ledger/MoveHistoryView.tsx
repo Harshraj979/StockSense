@@ -168,16 +168,16 @@ const DEMO_LEDGER: LedgerEntry[] = [
 const STATUS_ORDER = ['DRAFT', 'WAITING', 'READY', 'DONE'];
 
 const moveTypeConfig = {
-  IN: { color: '#15803d', bg: '#ecfdf5', border: '#a7f3d0', label: 'INBOUND', Icon: TrendingUp },
-  OUT: { color: '#b91c1c', bg: '#fef2f2', border: '#fecaca', label: 'OUTBOUND', Icon: TrendingDown },
-  INT: { color: '#0284c7', bg: '#f0f9ff', border: '#bae6fd', label: 'INTERNAL', Icon: ArrowLeftRight }
+  IN: { color: '#10b981', bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.3)', label: 'INBOUND', Icon: TrendingUp },
+  OUT: { color: '#ef4444', bg: 'rgba(239,68,68,0.12)', border: 'rgba(239,68,68,0.3)', label: 'OUTBOUND', Icon: TrendingDown },
+  INT: { color: '#06b6d4', bg: 'rgba(6,182,212,0.12)', border: 'rgba(6,182,212,0.3)', label: 'INTERNAL', Icon: ArrowLeftRight }
 };
 
 const statusConfig: Record<string, { color: string; bg: string; border: string }> = {
-  DRAFT: { color: '#475569', bg: '#f1f5f9', border: '#e2e8f0' },
-  WAITING: { color: '#b45309', bg: '#fffbeb', border: '#fde68a' },
-  READY: { color: '#1d4ed8', bg: '#eff6ff', border: '#bfdbfe' },
-  DONE: { color: '#15803d', bg: '#ecfdf5', border: '#a7f3d0' }
+  DRAFT: { color: '#94a3b8', bg: 'rgba(148,163,184,0.12)', border: 'rgba(148,163,184,0.3)' },
+  WAITING: { color: '#f59e0b', bg: 'rgba(245,158,11,0.12)', border: 'rgba(245,158,11,0.3)' },
+  READY: { color: '#818cf8', bg: 'rgba(129,140,248,0.12)', border: 'rgba(129,140,248,0.3)' },
+  DONE: { color: '#10b981', bg: 'rgba(16,185,129,0.12)', border: 'rgba(16,185,129,0.3)' }
 };
 
 function formatDate(iso: string) {
@@ -246,7 +246,7 @@ function KanbanCard({ entry }: { entry: LedgerEntry }) {
       }}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.45rem' }}>
-        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 700, color: '#0f172a' }}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', fontWeight: 700, color: '#818cf8' }}>
           {entry.reference}
         </span>
         <MoveTypeBadge moveType={entry.moveType} />
@@ -286,9 +286,9 @@ function KanbanColumn({ status, entries }: { status: string; entries: LedgerEntr
   return (
     <div style={{
       flex: 1, minWidth: '220px', maxWidth: '290px',
-      background: '#f8fafc',
+      background: 'rgba(255,255,255,0.02)',
       border: '1px solid var(--border-subtle)',
-      borderRadius: '10px',
+      borderRadius: '12px',
       display: 'flex',
       flexDirection: 'column'
     }}>
@@ -377,10 +377,10 @@ export default function MoveHistoryView() {
 
   const hasFilter = Boolean(search || filterMoveType || filterStatus);
   const kpiCards = [
-    { label: 'Total Moves', value: hasFilter ? filtered.length : kpis.total, icon: ArrowRightLeft, color: '#0f172a', bg: '#f1f5f9' },
-    { label: 'Inbound (IN)', value: hasFilter ? filtered.filter(e => e.moveType === 'IN').length : kpis.inbound, icon: TrendingUp, color: '#15803d', bg: '#ecfdf5' },
-    { label: 'Outbound (OUT)', value: hasFilter ? filtered.filter(e => e.moveType === 'OUT').length : kpis.outbound, icon: TrendingDown, color: '#b91c1c', bg: '#fef2f2' },
-    { label: 'Internal (INT)', value: hasFilter ? filtered.filter(e => e.moveType === 'INT').length : kpis.internal, icon: Layers, color: '#0284c7', bg: '#f0f9ff' }
+    { label: 'Total Moves', value: hasFilter ? filtered.length : kpis.total, icon: ArrowRightLeft, color: '#818cf8', bg: 'rgba(129,140,248,0.12)' },
+    { label: 'Inbound (IN)', value: hasFilter ? filtered.filter(e => e.moveType === 'IN').length : kpis.inbound, icon: TrendingUp, color: '#10b981', bg: 'rgba(16,185,129,0.12)' },
+    { label: 'Outbound (OUT)', value: hasFilter ? filtered.filter(e => e.moveType === 'OUT').length : kpis.outbound, icon: TrendingDown, color: '#ef4444', bg: 'rgba(239,68,68,0.12)' },
+    { label: 'Internal (INT)', value: hasFilter ? filtered.filter(e => e.moveType === 'INT').length : kpis.internal, icon: Layers, color: '#06b6d4', bg: 'rgba(6,182,212,0.12)' }
   ];
 
   return (
@@ -392,10 +392,10 @@ export default function MoveHistoryView() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.25rem' }}>
             <div style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              width: '36px', height: '36px', borderRadius: '8px',
-              background: '#f1f5f9', color: '#0f172a', border: '1px solid #e2e8f0'
+              width: '38px', height: '38px', borderRadius: '10px',
+              background: 'rgba(6,182,212,0.15)', color: '#22d3ee'
             }}>
-              <ArrowRightLeft size={18} />
+              <ArrowRightLeft size={20} />
             </div>
             <div>
               <h1 style={{ fontSize: '1.35rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-main)' }}>
@@ -582,10 +582,10 @@ export default function MoveHistoryView() {
             gridTemplateColumns: '1.6fr 1.4fr 1.5fr 1.5fr 1.3fr 0.7fr 0.95fr 0.85fr',
             padding: '0.75rem 1.25rem',
             borderBottom: '1px solid var(--border-subtle)',
-            background: '#f8fafc'
+            background: 'rgba(255,255,255,0.02)'
           }}>
             {['Date & Time', 'Reference', 'Contact', 'From', 'To', 'Qty', 'Type', 'Status'].map(h => (
-              <div key={h} style={{ fontSize: '0.72rem', fontWeight: 600, color: '#64748b', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+              <div key={h} style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.06em' }}>
                 {h}
               </div>
             ))}
@@ -611,7 +611,7 @@ export default function MoveHistoryView() {
                     transition: 'all 0.15s ease',
                     borderLeft: `3px solid ${cfg.color}`
                   }}
-                  onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = '#f8fafc'}
+                  onMouseEnter={e => (e.currentTarget as HTMLDivElement).style.background = 'rgba(255,255,255,0.025)'}
                   onMouseLeave={e => (e.currentTarget as HTMLDivElement).style.background = ''}
                 >
                   <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)' }}>
@@ -619,7 +619,7 @@ export default function MoveHistoryView() {
                   </div>
                   <div style={{
                     fontFamily: 'var(--font-mono)', fontSize: '0.82rem',
-                    fontWeight: 700, color: '#0f172a'
+                    fontWeight: 700, color: '#818cf8'
                   }}>
                     {entry.reference}
                   </div>

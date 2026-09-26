@@ -66,11 +66,11 @@ function LocationFormModal({ warehouses, initial, onSave, onClose, mode }: {
   };
 
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.4)', backdropFilter: 'blur(2px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200, padding: '1rem' }}>
-      <div style={{ width: '100%', maxWidth: '460px', background: '#ffffff', border: '1px solid var(--border-subtle)', borderRadius: '12px', padding: '1.75rem', boxShadow: 'var(--shadow-modal)' }}>
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200, padding: '1rem' }}>
+      <div style={{ width: '100%', maxWidth: '460px', background: 'var(--bg-secondary)', border: '1px solid var(--border-subtle)', borderRadius: '16px', padding: '1.75rem', boxShadow: 'var(--shadow-lg)', animation: 'fadeInScale 0.2s ease-out' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '6px', background: '#f1f5f9', color: '#0f172a', border: '1px solid #e2e8f0' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '32px', height: '32px', borderRadius: '8px', background: 'rgba(56,189,248,0.15)', color: '#38bdf8' }}>
               <MapPin size={16} />
             </div>
             <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)' }}>
@@ -179,10 +179,10 @@ function LocationFormModal({ warehouses, initial, onSave, onClose, mode }: {
             disabled={saving}
             style={{
               flex: 2, padding: '0.65rem', borderRadius: '8px',
-              background: saving ? '#475569' : '#0f172a',
+              background: saving ? 'rgba(56,189,248,0.3)' : 'linear-gradient(135deg, #0891b2, #06b6d4)',
               border: 'none', color: '#fff', cursor: saving ? 'not-allowed' : 'pointer',
-              fontWeight: 600, fontSize: '0.875rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem',
-              boxShadow: 'var(--shadow-sm)'
+              fontWeight: 700, fontSize: '0.875rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem',
+              boxShadow: '0 4px 12px rgba(6,182,212,0.3)'
             }}
           >
             {saving ? <><RefreshCw size={14} style={{ animation: 'spin 1s linear infinite' }} /> Saving…</> : <><Check size={14} /> {mode === 'create' ? 'Create Location' : 'Save Changes'}</>}
@@ -195,11 +195,11 @@ function LocationFormModal({ warehouses, initial, onSave, onClose, mode }: {
 
 function ConfirmDeleteModal({ name, onConfirm, onClose }: { name: string; onConfirm: () => void; onClose: () => void }) {
   return (
-    <div style={{ position: 'fixed', inset: 0, background: 'rgba(15,23,42,0.4)', backdropFilter: 'blur(2px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200, padding: '1rem' }}>
-      <div style={{ width: '100%', maxWidth: '380px', background: '#ffffff', border: '1px solid var(--border-subtle)', borderRadius: '12px', padding: '1.75rem', boxShadow: 'var(--shadow-modal)' }}>
+    <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 200, padding: '1rem' }}>
+      <div style={{ width: '100%', maxWidth: '380px', background: 'var(--bg-secondary)', border: '1px solid rgba(239,68,68,0.3)', borderRadius: '16px', padding: '1.75rem', boxShadow: 'var(--shadow-lg)' }}>
         <div style={{ textAlign: 'center', marginBottom: '1.25rem' }}>
-          <div style={{ display: 'inline-flex', padding: '0.75rem', borderRadius: '50%', background: '#fef2f2', color: '#dc2626', marginBottom: '0.75rem' }}>
-            <Trash2 size={22} />
+          <div style={{ display: 'inline-flex', padding: '0.85rem', borderRadius: '50%', background: 'rgba(239,68,68,0.12)', color: '#ef4444', marginBottom: '0.85rem' }}>
+            <Trash2 size={24} />
           </div>
           <h3 style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--text-main)', marginBottom: '0.4rem' }}>Delete Location?</h3>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
@@ -208,7 +208,7 @@ function ConfirmDeleteModal({ name, onConfirm, onClose }: { name: string; onConf
         </div>
         <div style={{ display: 'flex', gap: '0.75rem' }}>
           <button onClick={onClose} style={{ flex: 1, padding: '0.65rem', borderRadius: '8px', background: 'var(--bg-tertiary)', border: '1px solid var(--border-subtle)', color: 'var(--text-muted)', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem' }}>Cancel</button>
-          <button id="loc-confirm-delete" onClick={onConfirm} style={{ flex: 1, padding: '0.65rem', borderRadius: '8px', background: '#dc2626', border: 'none', color: '#fff', cursor: 'pointer', fontWeight: 600, fontSize: '0.875rem' }}>
+          <button id="loc-confirm-delete" onClick={onConfirm} style={{ flex: 1, padding: '0.65rem', borderRadius: '8px', background: 'linear-gradient(135deg, #dc2626, #ef4444)', border: 'none', color: '#fff', cursor: 'pointer', fontWeight: 700, fontSize: '0.875rem' }}>
             Delete
           </button>
         </div>
@@ -305,8 +305,8 @@ export default function LocationSettingsView() {
       {/* Header */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '36px', height: '36px', borderRadius: '8px', background: '#f1f5f9', color: '#0f172a', border: '1px solid #e2e8f0' }}>
-            <MapPin size={18} />
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '38px', height: '38px', borderRadius: '10px', background: 'rgba(56,189,248,0.15)', color: '#38bdf8' }}>
+            <MapPin size={20} />
           </div>
           <div>
             <h1 style={{ fontSize: '1.35rem', fontWeight: 800, letterSpacing: '-0.02em', color: 'var(--text-main)' }}>
@@ -322,13 +322,13 @@ export default function LocationSettingsView() {
           onClick={() => { setSelected(null); setModal('create'); }}
           style={{
             display: 'flex', alignItems: 'center', gap: '0.5rem',
-            padding: '0.55rem 1rem', borderRadius: '8px',
-            background: '#0f172a',
-            border: '1px solid #0f172a', color: '#fff', cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem',
-            boxShadow: 'var(--shadow-sm)', transition: 'all 0.2s'
+            padding: '0.6rem 1.1rem', borderRadius: '9px',
+            background: 'linear-gradient(135deg, #0891b2, #06b6d4)',
+            border: 'none', color: '#fff', cursor: 'pointer', fontWeight: 700, fontSize: '0.875rem',
+            boxShadow: '0 4px 12px rgba(6,182,212,0.3)', transition: 'all 0.2s'
           }}
-          onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#1e293b'; }}
-          onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.backgroundColor = '#0f172a'; }}
+          onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.transform = 'translateY(-1px)'; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.transform = ''; }}
         >
           <Plus size={16} /> Add Location
         </button>

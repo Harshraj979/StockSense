@@ -272,7 +272,7 @@ export default function FulfillmentEngineView({ initialSubTab = 'deliveries' }: 
               padding: '0.45rem 0.85rem',
               borderRadius: '6px',
               border: 'none',
-              background: subTab === 'deliveries' ? '#0f172a' : 'transparent',
+              background: subTab === 'deliveries' ? 'linear-gradient(135deg, #6366f1, #4f46e5)' : 'transparent',
               color: subTab === 'deliveries' ? '#ffffff' : 'var(--text-muted)',
               fontSize: '0.8rem',
               fontWeight: 600,
@@ -292,7 +292,7 @@ export default function FulfillmentEngineView({ initialSubTab = 'deliveries' }: 
               padding: '0.45rem 0.85rem',
               borderRadius: '6px',
               border: 'none',
-              background: subTab === 'transfers' ? '#0f172a' : 'transparent',
+              background: subTab === 'transfers' ? 'linear-gradient(135deg, #06b6d4, #0284c7)' : 'transparent',
               color: subTab === 'transfers' ? '#ffffff' : 'var(--text-muted)',
               fontSize: '0.8rem',
               fontWeight: 600,
@@ -312,7 +312,7 @@ export default function FulfillmentEngineView({ initialSubTab = 'deliveries' }: 
               padding: '0.45rem 0.85rem',
               borderRadius: '6px',
               border: 'none',
-              background: subTab === 'adjustments' ? '#0f172a' : 'transparent',
+              background: subTab === 'adjustments' ? 'linear-gradient(135deg, #f59e0b, #d97706)' : 'transparent',
               color: subTab === 'adjustments' ? '#ffffff' : 'var(--text-muted)',
               fontSize: '0.8rem',
               fontWeight: 600,
@@ -513,7 +513,7 @@ export default function FulfillmentEngineView({ initialSubTab = 'deliveries' }: 
                     </button>
                   )}
                   {selectedDelivery.status === 'READY' && (
-                    <button className="btn btn-primary" onClick={() => handleDeliveryStatusUpdate(selectedDelivery.id, 'DONE')} style={{ width: '100%', justifyContent: 'center', background: '#15803d', border: 'none' }}>
+                    <button className="btn btn-primary" onClick={() => handleDeliveryStatusUpdate(selectedDelivery.id, 'DONE')} style={{ width: '100%', justifyContent: 'center', background: 'linear-gradient(135deg, #10b981, #059669)', border: 'none' }}>
                       Validate & Dispatch Order
                     </button>
                   )}
@@ -531,7 +531,7 @@ export default function FulfillmentEngineView({ initialSubTab = 'deliveries' }: 
             <div style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
               Inter-location movements within company premises (maintains constant total stock ledger).
             </div>
-            <button className="btn btn-primary" onClick={() => setCreateTransferOpen(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <button className="btn btn-primary" onClick={() => setCreateTransferOpen(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'linear-gradient(135deg, #06b6d4, #0284c7)', border: 'none' }}>
               <Plus size={16} /> New Internal Move
             </button>
           </div>
@@ -579,7 +579,7 @@ export default function FulfillmentEngineView({ initialSubTab = 'deliveries' }: 
                 Realign physical inventory counts with automated audit reason tags (Damaged, Theft, Expired, Misplaced).
               </p>
             </div>
-            <button className="btn btn-primary" onClick={() => setCreateAdjustmentOpen(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
+            <button className="btn btn-primary" onClick={() => setCreateAdjustmentOpen(true)} style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', background: 'linear-gradient(135deg, #f59e0b, #d97706)', border: 'none' }}>
               <Plus size={16} /> Log Cycle Count Discrepancy
             </button>
           </div>
@@ -786,7 +786,7 @@ export default function FulfillmentEngineView({ initialSubTab = 'deliveries' }: 
 
               <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'flex-end', marginTop: '0.5rem' }}>
                 <button type="button" className="btn btn-secondary" onClick={() => setCreateAdjustmentOpen(false)}>Cancel</button>
-                <button type="submit" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary" style={{ background: 'linear-gradient(135deg, #f59e0b, #d97706)', border: 'none' }}>
                   Re-align Ledger & Log
                 </button>
               </div>
