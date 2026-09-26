@@ -71,6 +71,7 @@ model Product {
   uom            String          @default("Units")
   unitCost       Float           @default(0.0)
   reorderMin     Float           @default(10.0)
+  reorderMax     Float           @default(100.0)
   stockLevels    StockLevel[]
   operationLines OperationLine[]
   ledgerEntries  StockLedger[]

@@ -3,8 +3,8 @@ import { useAuth } from './context/AuthContext';
 import AuthPage from './modules/auth/AuthPage';
 import Navbar from './components/Navbar';
 import CommandCenterDashboard from './modules/dashboard/CommandCenterDashboard';
+import StockView from './modules/stock/StockView';
 import {
-  StockView,
   MoveHistoryView,
   WarehouseSettingsView,
   LocationSettingsView
@@ -47,7 +47,7 @@ export default function App() {
     );
   }
 
-  // If no user session → show auth pages; otherwise show the full application
+  // If no user session, show auth pages; otherwise show the full application
   if (!user) {
     return <AuthPage />;
   }
