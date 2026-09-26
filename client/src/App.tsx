@@ -11,6 +11,8 @@ import {
 } from './modules/dashboard/AuxiliaryViews';
 import './styles/index.css';
 
+import InboundReceiptsView from './modules/receipts/InboundReceiptsView';
+
 export default function App() {
   const { user, isLoading } = useAuth();
   const [activeTab, setActiveTab] = useState<string>('Dashboard');
@@ -60,6 +62,7 @@ export default function App() {
         {activeTab === 'Dashboard' && (
           <CommandCenterDashboard initialTypeFilter={opsFilter} />
         )}
+        {activeTab === 'Receipts' && <InboundReceiptsView />}
         {activeTab === 'Stock' && <StockView />}
         {activeTab === 'Move History' && <MoveHistoryView />}
         {activeTab === 'Settings-Warehouse' && <WarehouseSettingsView />}
