@@ -1,6 +1,6 @@
 // Global Auth State — simple React context, no third-party state library needed
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { api } from '../api/client';
 
 interface User {
@@ -17,6 +17,7 @@ interface AuthContextType {
   isLoading: boolean;
   login: (loginId: string, password: string) => Promise<void>;
   logout: () => void;
+  switchRole: (role: 'MANAGER' | 'STAFF') => void;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -59,8 +60,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(null);
   };
 
+  const switchRole = (newRole: 'MANAGER' | 'STAFF') => {
+    if (!user) return;
+    const updated: User = {
+      ...user,
+      role: newRole,
+      loginId: newRole === 'MANAGER' ? 'manager01' : 'warehouse01',
+      name: newRole === 'MANAGER' ? 'Chief Inventory Manager' : 'Warehouse Operations Staff'
+    };
+    setUser(updated);
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, login, logout, switchRole }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,11 +1,14 @@
-import React from 'react';
+import { useState } from 'react';
 import { useAuth } from './context/AuthContext';
 import AuthPage from './modules/auth/AuthPage';
+import StockView from './modules/stock/StockView';
+import { TopNavbar } from './components/TopNavbar';
 import DashboardPlaceholder from './modules/dashboard/DashboardPlaceholder';
 import './styles/index.css';
 
 export default function App() {
   const { user, isLoading } = useAuth();
+  const [activeTab, setActiveTab] = useState<'stock' | 'dashboard' | 'operations'>('stock');
 
   if (isLoading) {
     return (
@@ -26,10 +29,22 @@ export default function App() {
     );
   }
 
-  // If no user session → show auth pages; otherwise show the app
+  // If no user session → show auth pages (Module 1); otherwise show the application
   if (!user) {
     return <AuthPage />;
   }
 
-  return <DashboardPlaceholder />;
+  return (
+    <div style={{ minHeight: '100vh', background: 'var(--bg-primary)', display: 'flex', flexDirection: 'column' }}>
+      <TopNavbar activeTab={activeTab} setActiveTab={(tab: any) => setActiveTab(tab)} />
+
+      <main style={{ flex: 1 }}>
+        {activeTab === 'stock' ? (
+          <StockView />
+        ) : (
+          <DashboardPlaceholder />
+        )}
+      </main>
+    </div>
+  );
 }

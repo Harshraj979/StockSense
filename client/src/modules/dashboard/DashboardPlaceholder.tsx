@@ -1,7 +1,6 @@
 // Temporary dashboard placeholder — shown to authenticated users until
 // Module 2 (Command Center Dashboard) is implemented.
 
-import React from 'react';
 import { Package, LogOut, LayoutDashboard } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
