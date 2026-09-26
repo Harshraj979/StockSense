@@ -69,5 +69,42 @@ export const api = {
     },
     getBottlenecks: () => request('/dashboard/bottlenecks'),
     getFilters: () => request('/dashboard/filters')
+  },
+  fulfillment: {
+    getDeliveries: (params?: { search?: string; status?: string }) => {
+      const query = new URLSearchParams(params as Record<string, string>).toString();
+      return request(`/fulfillment/deliveries${query ? `?${query}` : ''}`);
+    },
+    getDeliveryById: (id: string) => request(`/fulfillment/deliveries/${id}`),
+    createDelivery: (body: {
+      partnerContact: string;
+      deliveryAddress: string;
+      scheduleDate: string;
+      responsibleName?: string;
+      lines: Array<{ productName: string; sku?: string; demandQty: number; rackLocation?: string; uom?: string }>;
+    }) => request('/fulfillment/deliveries', { method: 'POST', body: JSON.stringify(body) }),
+    updateDeliveryStatus: (id: string, status: 'DRAFT' | 'WAITING' | 'READY' | 'DONE') =>
+      request(`/fulfillment/deliveries/${id}/status`, { method: 'PUT', body: JSON.stringify({ status }) }),
+    getPickingRoute: (id: string) => request(`/fulfillment/deliveries/${id}/picking-route`),
+    getInternalTransfers: () => request('/fulfillment/transfers'),
+    createInternalTransfer: (body: {
+      sourceLocation: string;
+      destLocation: string;
+      scheduleDate: string;
+      responsibleName?: string;
+      lines: Array<{ productName: string; sku?: string; demandQty: number; uom?: string }>;
+    }) => request('/fulfillment/transfers', { method: 'POST', body: JSON.stringify(body) }),
+    updateTransferStatus: (id: string, status: 'DRAFT' | 'READY' | 'DONE') =>
+      request(`/fulfillment/transfers/${id}/status`, { method: 'PUT', body: JSON.stringify({ status }) }),
+    getAdjustments: () => request('/fulfillment/adjustments'),
+    createAdjustment: (body: {
+      location: string;
+      productName: string;
+      sku?: string;
+      recordedQty: number;
+      countedQty: number;
+      reasonTag: 'Damaged' | 'Theft' | 'Expired' | 'Misplaced' | 'Data Correction';
+      responsibleName?: string;
+    }) => request('/fulfillment/adjustments', { method: 'POST', body: JSON.stringify(body) })
   }
 };

@@ -11,6 +11,8 @@ import {
 } from './modules/dashboard/AuxiliaryViews';
 import './styles/index.css';
 
+import FulfillmentEngineView from './modules/fulfillment/FulfillmentEngineView';
+
 export default function App() {
   const { user, isLoading } = useAuth();
   const [activeTab, setActiveTab] = useState<string>('Dashboard');
@@ -59,6 +61,17 @@ export default function App() {
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
         {activeTab === 'Dashboard' && (
           <CommandCenterDashboard initialTypeFilter={opsFilter} />
+        )}
+        {activeTab.startsWith('Fulfillment') && (
+          <FulfillmentEngineView
+            initialSubTab={
+              activeTab === 'Fulfillment-transfers'
+                ? 'transfers'
+                : activeTab === 'Fulfillment-adjustments'
+                ? 'adjustments'
+                : 'deliveries'
+            }
+          />
         )}
         {activeTab === 'Stock' && <StockView />}
         {activeTab === 'Move History' && <MoveHistoryView />}
