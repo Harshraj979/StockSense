@@ -3,8 +3,8 @@ import { useAuth } from './context/AuthContext';
 import AuthPage from './modules/auth/AuthPage';
 import Navbar from './components/Navbar';
 import CommandCenterDashboard from './modules/dashboard/CommandCenterDashboard';
+import StockView from './modules/stock/StockView';
 import {
-  StockView,
   MoveHistoryView,
   WarehouseSettingsView,
   LocationSettingsView
@@ -12,6 +12,7 @@ import {
 import './styles/index.css';
 
 import FulfillmentEngineView from './modules/fulfillment/FulfillmentEngineView';
+import InboundReceiptsView from './modules/receipts/InboundReceiptsView';
 
 export default function App() {
   const { user, isLoading } = useAuth();
@@ -47,7 +48,7 @@ export default function App() {
     );
   }
 
-  // If no user session → show auth pages; otherwise show the full application
+  // If no user session, show auth pages; otherwise show the full application
   if (!user) {
     return <AuthPage />;
   }
@@ -62,6 +63,7 @@ export default function App() {
         {activeTab === 'Dashboard' && (
           <CommandCenterDashboard initialTypeFilter={opsFilter} />
         )}
+        {activeTab === 'Receipts' && <InboundReceiptsView />}
         {activeTab.startsWith('Fulfillment') && (
           <FulfillmentEngineView
             initialSubTab={

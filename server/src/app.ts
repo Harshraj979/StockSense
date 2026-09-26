@@ -2,6 +2,8 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import authRoutes from './modules/auth/auth.routes';
 import dashboardRoutes from './modules/dashboard/dashboard.routes';
+import productRoutes from './modules/products/product.routes';
+import receiptsRoutes from './modules/receipts/receipts.routes';
 import fulfillmentRoutes from './modules/fulfillment/fulfillment.routes';
 
 const app: Application = express();
@@ -28,6 +30,12 @@ app.use('/api/auth', authRoutes);
 
 // Command Center Dashboard & Operational Intelligence
 app.use('/api/dashboard', dashboardRoutes);
+
+// Master Catalog & Live Multi-Location Stock Engine
+app.use('/api/products', productRoutes);
+
+// Inbound Operations (Vendor Receipts)
+app.use('/api/receipts', receiptsRoutes);
 
 // Fulfillment Engine (Deliveries, Internal Transfers, Stock Adjustments)
 app.use('/api/fulfillment', fulfillmentRoutes);

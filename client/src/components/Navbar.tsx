@@ -101,14 +101,14 @@ export default function Navbar({ activeTab, onTabChange }: NavbarProps) {
               {opsDropdownOpen && (
                 <div className="nav-dropdown-menu">
                   <button
-                    className={`dropdown-item ${activeTab === 'Operations-Receipt' ? 'active' : ''}`}
+                    className={`dropdown-item ${activeTab === 'Receipts' ? 'active' : ''}`}
                     onClick={() => {
-                      onTabChange('Dashboard', { type: 'IN' });
+                      onTabChange('Receipts');
                       setOpsDropdownOpen(false);
                     }}
                   >
                     <FileCheck size={15} color="#10b981" />
-                    Receipt
+                    Receipts (Inbound)
                   </button>
                   <button
                     className={`dropdown-item ${activeTab.startsWith('Fulfillment-deliveries') ? 'active' : ''}`}
