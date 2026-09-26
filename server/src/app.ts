@@ -5,6 +5,8 @@ import dashboardRoutes from './modules/dashboard/dashboard.routes';
 import productRoutes from './modules/products/product.routes';
 import receiptsRoutes from './modules/receipts/receipts.routes';
 import fulfillmentRoutes from './modules/fulfillment/fulfillment.routes';
+import ledgerRoutes from './modules/ledger/ledger.routes';
+import warehouseRoutes from './modules/warehouse/warehouse.routes';
 
 const app: Application = express();
 
@@ -39,6 +41,12 @@ app.use('/api/receipts', receiptsRoutes);
 
 // Fulfillment Engine (Deliveries, Internal Transfers, Stock Adjustments)
 app.use('/api/fulfillment', fulfillmentRoutes);
+
+// Module 6: Unified Stock Ledger (Move History / Audit Trail)
+app.use('/api/ledger', ledgerRoutes);
+
+// Module 6: Warehouse & Location Spatial Hierarchy
+app.use('/api/settings', warehouseRoutes);
 
 // Global Error Handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {

@@ -668,5 +668,39 @@ export const api = {
     dockAcceptance: (id: string, targetLocation: string) =>
       request(`/receipts/${id}/dock-accept`, { method: 'POST', body: JSON.stringify({ targetLocation }) }),
     getGRN: (id: string) => request(`/receipts/${id}/grn`)
+  },
+
+  // ──────────────────────────────────────────────────────
+  // MODULE 6: Unified Stock Ledger & Spatial Hierarchy
+  // ──────────────────────────────────────────────────────
+  ledger: {
+    getEntries: (params?: { search?: string; moveType?: string; status?: string }) => {
+      const query = new URLSearchParams(params as Record<string, string>).toString();
+      return request(`/ledger${query ? `?${query}` : ''}`);
+    },
+    getKPIs: () => request('/ledger/kpis')
+  },
+
+  warehouses: {
+    getAll: () => request('/settings/warehouses'),
+    create: (body: { name: string; shortCode: string; address?: string }) =>
+      request('/settings/warehouses', { method: 'POST', body: JSON.stringify(body) }),
+    update: (id: string, body: { name?: string; address?: string }) =>
+      request(`/settings/warehouses/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
+    delete: (id: string) =>
+      request(`/settings/warehouses/${id}`, { method: 'DELETE' })
+  },
+
+  locations: {
+    getAll: (warehouseId?: string) => {
+      const qs = warehouseId ? `?warehouseId=${warehouseId}` : '';
+      return request(`/settings/locations${qs}`);
+    },
+    create: (body: { warehouseId: string; name: string; shortCode: string }) =>
+      request('/settings/locations', { method: 'POST', body: JSON.stringify(body) }),
+    update: (id: string, body: { name?: string }) =>
+      request(`/settings/locations/${id}`, { method: 'PUT', body: JSON.stringify(body) }),
+    delete: (id: string) =>
+      request(`/settings/locations/${id}`, { method: 'DELETE' })
   }
 };

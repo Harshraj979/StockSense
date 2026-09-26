@@ -4,11 +4,9 @@ import AuthPage from './modules/auth/AuthPage';
 import Navbar from './components/Navbar';
 import CommandCenterDashboard from './modules/dashboard/CommandCenterDashboard';
 import StockView from './modules/stock/StockView';
-import {
-  MoveHistoryView,
-  WarehouseSettingsView,
-  LocationSettingsView
-} from './modules/dashboard/AuxiliaryViews';
+import MoveHistoryView from './modules/ledger/MoveHistoryView';
+import WarehouseSettingsView from './modules/ledger/WarehouseSettingsView';
+import LocationSettingsView from './modules/ledger/LocationSettingsView';
 import './styles/index.css';
 
 import FulfillmentEngineView from './modules/fulfillment/FulfillmentEngineView';
