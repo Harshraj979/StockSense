@@ -1,7 +1,7 @@
 // Auth module router — decides which view is visible
 // No third-party routing needed at this level; keeps it simple
 
-import React, { useState } from 'react';
+import { useState } from 'react';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import ForgotPasswordFlow from './ForgotPasswordFlow';

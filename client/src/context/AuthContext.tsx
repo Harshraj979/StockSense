@@ -1,6 +1,6 @@
 // Global Auth State — simple React context, no third-party state library needed
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { api } from '../api/client';
 
 interface User {

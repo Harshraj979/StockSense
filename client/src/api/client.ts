@@ -60,5 +60,14 @@ export const api = {
       request('/auth/reset-password', { method: 'POST', body: JSON.stringify(body) }),
 
     getMe: () => request('/auth/me')
+  },
+  dashboard: {
+    getSummary: () => request('/dashboard/summary'),
+    getOperations: (params?: { type?: string; status?: string; warehouse?: string; category?: string; search?: string }) => {
+      const query = new URLSearchParams(params as Record<string, string>).toString();
+      return request(`/dashboard/operations${query ? `?${query}` : ''}`);
+    },
+    getBottlenecks: () => request('/dashboard/bottlenecks'),
+    getFilters: () => request('/dashboard/filters')
   }
 };
