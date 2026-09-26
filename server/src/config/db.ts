@@ -9,7 +9,6 @@ export async function connectDB() {
     await prisma.$connect();
     console.log('✅ Connected to PostgreSQL database successfully.');
   } catch (error) {
-    console.error('❌ Database connection error:', error);
-    process.exit(1);
+    console.warn('⚠️ Database connection warning: PostgreSQL is not active or DATABASE_URL is unset. Operating in fallback mock mode.', (error as any).message);
   }
 }

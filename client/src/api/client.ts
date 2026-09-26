@@ -602,5 +602,14 @@ export const api = {
         data: product
       };
     }
+  },
+  dashboard: {
+    getSummary: () => request('/dashboard/summary'),
+    getOperations: (params?: { type?: string; status?: string; warehouse?: string; category?: string; search?: string }) => {
+      const query = new URLSearchParams(params as Record<string, string>).toString();
+      return request(`/dashboard/operations${query ? `?${query}` : ''}`);
+    },
+    getBottlenecks: () => request('/dashboard/bottlenecks'),
+    getFilters: () => request('/dashboard/filters')
   }
 };

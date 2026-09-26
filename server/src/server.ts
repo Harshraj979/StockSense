@@ -5,7 +5,7 @@ import app from './app';
 import { connectDB, prisma } from './config/db';
 import bcrypt from 'bcryptjs';
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 async function seedInitialData() {
   try {
