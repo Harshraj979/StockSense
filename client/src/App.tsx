@@ -11,6 +11,7 @@ import {
 } from './modules/dashboard/AuxiliaryViews';
 import './styles/index.css';
 
+import FulfillmentEngineView from './modules/fulfillment/FulfillmentEngineView';
 import InboundReceiptsView from './modules/receipts/InboundReceiptsView';
 
 export default function App() {
@@ -63,6 +64,17 @@ export default function App() {
           <CommandCenterDashboard initialTypeFilter={opsFilter} />
         )}
         {activeTab === 'Receipts' && <InboundReceiptsView />}
+        {activeTab.startsWith('Fulfillment') && (
+          <FulfillmentEngineView
+            initialSubTab={
+              activeTab === 'Fulfillment-transfers'
+                ? 'transfers'
+                : activeTab === 'Fulfillment-adjustments'
+                ? 'adjustments'
+                : 'deliveries'
+            }
+          />
+        )}
         {activeTab === 'Stock' && <StockView />}
         {activeTab === 'Move History' && <MoveHistoryView />}
         {activeTab === 'Settings-Warehouse' && <WarehouseSettingsView />}

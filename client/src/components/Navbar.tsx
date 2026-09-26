@@ -111,29 +111,29 @@ export default function Navbar({ activeTab, onTabChange }: NavbarProps) {
                     Receipts (Inbound)
                   </button>
                   <button
-                    className={`dropdown-item ${activeTab === 'Operations-Delivery' ? 'active' : ''}`}
+                    className={`dropdown-item ${activeTab.startsWith('Fulfillment-deliveries') ? 'active' : ''}`}
                     onClick={() => {
-                      onTabChange('Dashboard', { type: 'OUT' });
+                      onTabChange('Fulfillment-deliveries');
                       setOpsDropdownOpen(false);
                     }}
                   >
                     <Truck size={15} color="#6366f1" />
-                    Delivery
+                    Delivery Orders
                   </button>
                   <button
-                    className={`dropdown-item ${activeTab === 'Operations-Adjustment' ? 'active' : ''}`}
+                    className={`dropdown-item ${activeTab.startsWith('Fulfillment-adjustments') ? 'active' : ''}`}
                     onClick={() => {
-                      onTabChange('Dashboard', { type: 'ADJ' });
+                      onTabChange('Fulfillment-adjustments');
                       setOpsDropdownOpen(false);
                     }}
                   >
                     <Sliders size={15} color="#f59e0b" />
-                    Adjustment
+                    Stock Adjustments
                   </button>
                   <button
-                    className={`dropdown-item ${activeTab === 'Operations-Internal' ? 'active' : ''}`}
+                    className={`dropdown-item ${activeTab.startsWith('Fulfillment-transfers') ? 'active' : ''}`}
                     onClick={() => {
-                      onTabChange('Dashboard', { type: 'INT' });
+                      onTabChange('Fulfillment-transfers');
                       setOpsDropdownOpen(false);
                     }}
                   >

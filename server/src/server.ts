@@ -171,7 +171,6 @@ async function seedInitialData() {
             uom: item.uom,
             unitCost: item.unitCost,
             reorderMin: item.reorderMin,
-            reorderMax: item.reorderMax,
             stockLevels: {
               create: {
                 locationId: item.locationId,

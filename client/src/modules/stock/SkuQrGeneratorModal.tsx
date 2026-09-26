@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+// @ts-ignore
 import QRCode from 'qrcode';
 import { X, Printer, Download, Copy, Check, QrCode, Tag, MapPin, DollarSign } from 'lucide-react';
 import { ProductItem } from '../../api/client';
@@ -38,7 +39,7 @@ export const SkuQrGeneratorModal: React.FC<SkuQrGeneratorModalProps> = ({ produc
         },
         errorCorrectionLevel: 'H'
       },
-      (error) => {
+      (error: any) => {
         if (error) {
           console.error('QR Generation Error:', error);
         } else if (canvasRef.current) {

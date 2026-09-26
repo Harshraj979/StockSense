@@ -144,7 +144,6 @@ export class ProductService {
         uom: input.uom,
         unitCost: input.unitCost,
         reorderMin: input.reorderMin,
-        reorderMax: input.reorderMax,
         stockLevels: {
           create: {
             locationId: defaultLoc.id,

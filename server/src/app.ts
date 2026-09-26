@@ -4,6 +4,7 @@ import authRoutes from './modules/auth/auth.routes';
 import dashboardRoutes from './modules/dashboard/dashboard.routes';
 import productRoutes from './modules/products/product.routes';
 import receiptsRoutes from './modules/receipts/receipts.routes';
+import fulfillmentRoutes from './modules/fulfillment/fulfillment.routes';
 
 const app: Application = express();
 
@@ -30,11 +31,14 @@ app.use('/api/auth', authRoutes);
 // Command Center Dashboard & Operational Intelligence
 app.use('/api/dashboard', dashboardRoutes);
 
-// Module 3: Master Catalog & Live Multi-Location Stock Engine
+// Master Catalog & Live Multi-Location Stock Engine
 app.use('/api/products', productRoutes);
 
 // Inbound Operations (Vendor Receipts)
 app.use('/api/receipts', receiptsRoutes);
+
+// Fulfillment Engine (Deliveries, Internal Transfers, Stock Adjustments)
+app.use('/api/fulfillment', fulfillmentRoutes);
 
 // Global Error Handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
