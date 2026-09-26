@@ -63,13 +63,12 @@ export default function Navbar({ activeTab, onTabChange }: NavbarProps) {
         >
           <div style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            width: '32px', height: '32px', borderRadius: '8px',
-            background: 'linear-gradient(135deg, #4f46e5, #06b6d4)',
-            boxShadow: '0 0 12px rgba(99, 102, 241, 0.4)'
+            width: '30px', height: '30px', borderRadius: '6px',
+            background: '#0f172a', color: '#ffffff'
           }}>
-            <Package size={18} color="#ffffff" />
+            <Package size={17} color="#ffffff" />
           </div>
-          <span style={{ letterSpacing: '-0.02em', background: 'linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+          <span style={{ fontWeight: 700, letterSpacing: '-0.02em', color: '#0f172a' }}>
             StockSense
           </span>
         </a>
