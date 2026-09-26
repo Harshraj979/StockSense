@@ -1,6 +1,7 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import authRoutes from './modules/auth/auth.routes';
+import dashboardRoutes from './modules/dashboard/dashboard.routes';
 
 const app: Application = express();
 
@@ -23,6 +24,9 @@ app.get('/api/health', (req: Request, res: Response) => {
 
 // Module 1: Auth & Access Control
 app.use('/api/auth', authRoutes);
+
+// Module 2: Command Center Dashboard & Operational Intelligence
+app.use('/api/dashboard', dashboardRoutes);
 
 // Global Error Handler
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
